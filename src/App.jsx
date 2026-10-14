@@ -136,7 +136,7 @@ export default function App() {
     <div className="min-h-screen bg-ink text-paper font-sans">
       <nav className="relative z-10 flex items-center gap-7 max-w-[1280px] mx-auto px-[clamp(20px,5vw,56px)] py-[26px]">
         <div className="flex items-center gap-3 mr-auto">
-          <img src="/svg/capann-icon-light.svg" alt="Capann" className="w-[30px] h-[30px]" />
+          <img src={`${import.meta.env.BASE_URL}svg/capann-icon-light.svg`} alt="Capann" className="w-[30px] h-[30px]" />
           <div className="font-display font-bold text-[29px] leading-none tracking-[0.03em]">
             CAPA<span className="text-draw">NN</span>
           </div>
@@ -316,7 +316,7 @@ export default function App() {
 
         <footer className="flex flex-wrap items-center gap-4 pt-8 pb-16 border-t border-white/10 text-[13px] text-muted">
           <div className="flex items-center gap-2.5 mr-auto">
-            <img src="/svg/capann-icon-light.svg" alt="" className="w-[22px] h-[22px] opacity-70" />
+            <img src={`${import.meta.env.BASE_URL}svg/capann-icon-light.svg`} alt="" className="w-[22px] h-[22px] opacity-70" />
             <div>Capann is built by <a href="https://duowork.tech" className="text-draw hover:text-draw-hover">Duowork</a>, a software firm building for how people actually work.</div>
           </div>
           <div>One-time purchase. No subscription.</div>
