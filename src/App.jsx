@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 const USES = [
   { dot: 'bg-draw', title: 'For teams giving feedback', body: 'Stop writing “the button on the top right, no the other top right” in a comment thread. Circle it. Drop a note next to it. Send a screenshot that answers questions before they’re asked.' },
@@ -52,6 +52,8 @@ const TOOLS_ROW2 = [
 ]
 
 const COLORS = ['#A78BFA', '#86EFAC', '#F5E8A6', '#F5F5F7']
+
+const YEAR = new Date().getFullYear()
 
 function ToolbarDemo() {
   const [tool, setTool] = useState('pencil')
@@ -132,32 +134,43 @@ function ToolbarDemo() {
 }
 
 export default function App() {
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
     <div className="min-h-screen bg-ink text-paper font-sans">
-      <nav className="relative z-10 flex items-center gap-7 max-w-[1280px] mx-auto px-[clamp(20px,5vw,56px)] py-[26px]">
-        <div className="flex items-center gap-3 mr-auto">
-          <img src={`${import.meta.env.BASE_URL}svg/capann-icon-light.svg`} alt="Capann" className="w-[30px] h-[30px]" />
-          <div className="font-display font-bold text-[29px] leading-none tracking-[0.03em]">
-            CAPA<span className="text-draw">NN</span>
+      <header className="fixed top-0 inset-x-0 z-50 px-[clamp(12px,3vw,32px)] pt-3">
+        <nav className={`max-w-[1280px] mx-auto flex items-center gap-7 px-5 md:px-7 py-3.5 rounded-[28px] border transition-all duration-morph ease-morph ${scrolled ? 'glass shadow-[0_18px_50px_rgba(0,0,0,0.45)]' : 'bg-transparent border-transparent'}`}>
+          <div className="flex items-center gap-3 mr-auto">
+            <img src={`${import.meta.env.BASE_URL}svg/capann-icon-light.svg`} alt="Capann" className="w-[30px] h-[30px]" />
+            <div className="font-display font-bold text-[29px] leading-none tracking-[0.03em]">
+              CAPA<span className="text-draw">NN</span>
+            </div>
           </div>
-        </div>
-        <div className="hidden md:flex items-center gap-7">
-          {[
-            ['Who it’s for', '#uses'],
-            ['What you get', '#features'],
-            ['Shortcuts', '#shortcuts'],
-            ['Pricing', '#pricing'],
-            ['FAQ', '#faq'],
-          ].map(([label, href]) => (
-            <a key={href + label} href={href} className="text-[13.5px] text-muted hover:text-paper transition-colors">{label}</a>
-          ))}
-        </div>
-        <a href="#pricing" className="inline-flex items-center px-5 py-2.5 rounded-full bg-draw text-ink text-[13.5px] font-medium hover:bg-draw-hover transition-colors">
-          Add to Chrome
-        </a>
-      </nav>
+          <div className="hidden md:flex items-center gap-7">
+            {[
+              ['Who it’s for', '#uses'],
+              ['What you get', '#features'],
+              ['Shortcuts', '#shortcuts'],
+              ['Pricing', '#pricing'],
+              ['FAQ', '#faq'],
+            ].map(([label, href]) => (
+              <a key={href + label} href={href} className="text-[13.5px] text-muted hover:text-paper transition-colors">{label}</a>
+            ))}
+          </div>
+          <a href="#pricing" className="inline-flex items-center px-5 py-2.5 rounded-full bg-draw text-ink text-[13.5px] font-medium hover:bg-draw-hover transition-colors">
+            Add to Chrome
+          </a>
+        </nav>
+      </header>
 
-      <main className="max-w-[1280px] mx-auto px-[clamp(20px,5vw,56px)]">
+      <main className="max-w-[1280px] mx-auto px-[clamp(20px,5vw,56px)] pt-[110px]">
         {/* Hero */}
         <section className="grid gap-14 items-center py-14 pb-24 lg:grid-cols-[1.05fr_0.95fr]">
           <div>
@@ -169,11 +182,10 @@ export default function App() {
               Capann is the browser extension that lets you draw, point, screenshot and screen-record on any page so the people you’re talking to actually see what you mean.
             </p>
             <div className="mt-7 text-[15.5px] leading-[1.85]">
-              One-time purchase. No subscription.{' '}
-              <span className="relative inline-block whitespace-nowrap pb-3">
-                Yours forever.
-                <svg viewBox="0 0 120 16" preserveAspectRatio="none" fill="none" className="absolute left-[-6px] bottom-0 w-[calc(100%+13px)] h-[14px]">
-                  <path d="M3 10.4 C 22 3.6, 40 12.8, 58 7 C 76 2, 96 12.4, 117 9.6" stroke="#86EFAC" strokeWidth="3.2" strokeLinecap="round" />
+              <span className="relative inline-block pb-[16px]">
+                One-time purchase. No subscription. Yours forever.
+                <svg viewBox="0 0 320 16" preserveAspectRatio="none" fill="none" className="absolute left-[-8px] bottom-0 w-[calc(100%+16px)] h-[16px]">
+                  <path d="M4 10.5 C 60 3, 110 13, 160 7 C 210 1.5, 260 12.5, 316 9" stroke="#86EFAC" strokeWidth="5" strokeLinecap="round" />
                 </svg>
               </span>
             </div>
@@ -208,7 +220,7 @@ export default function App() {
         </section>
 
         {/* Uses */}
-        <section id="uses" className="pb-24 scroll-mt-6">
+        <section id="uses" className="pb-24 scroll-mt-28">
           <div className="text-xs tracking-[0.16em] uppercase text-muted mb-4">Who it’s for</div>
           <h2 className="font-display font-bold leading-[0.92] tracking-[0.01em] mt-0 mb-11 max-w-[26ch] text-[clamp(38px,4.6vw,60px)]">
             BUILT FOR THE MOMENTS WHERE “JUST LOOK HERE” MATTERS
@@ -225,7 +237,7 @@ export default function App() {
         </section>
 
         {/* Features */}
-        <section id="features" className="pb-24 scroll-mt-6">
+        <section id="features" className="pb-24 scroll-mt-28">
           <div className="text-xs tracking-[0.16em] uppercase text-muted mb-9">What you get</div>
           <div className="grid gap-x-[clamp(24px,5vw,80px)] md:grid-cols-2">
             {FEATURES.map((f) => (
@@ -238,7 +250,7 @@ export default function App() {
         </section>
 
         {/* Shortcuts */}
-        <section id="shortcuts" className="pb-24 scroll-mt-6">
+        <section id="shortcuts" className="pb-24 scroll-mt-28">
           <div className="grid gap-10 items-center p-[clamp(28px,4vw,52px)] rounded-[40px] bg-panel border border-white/10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.1fr)] lg:gap-x-[clamp(24px,5vw,80px)]">
             <div>
               <h2 className="font-display font-bold leading-[0.92] tracking-[0.01em] m-0 max-w-[20ch] text-[clamp(34px,3.8vw,48px)]">
@@ -260,7 +272,7 @@ export default function App() {
         </section>
 
         {/* Pricing */}
-        <section id="pricing" className="pb-24 scroll-mt-6">
+        <section id="pricing" className="pb-24 scroll-mt-28">
           <div className="grid gap-10 items-center lg:grid-cols-[minmax(0,1fr)_minmax(0,0.85fr)] lg:gap-x-[clamp(24px,5vw,72px)]">
             <div>
               <div className="text-xs tracking-[0.16em] uppercase text-muted mb-4">Pricing</div>
@@ -289,7 +301,7 @@ export default function App() {
         </section>
 
         {/* FAQ */}
-        <section id="faq" className="pb-24 scroll-mt-6">
+        <section id="faq" className="pb-24 scroll-mt-28">
           <div className="text-xs tracking-[0.16em] uppercase text-muted mb-4">FAQ</div>
           <h2 className="font-display font-bold leading-[0.92] tracking-[0.01em] mt-0 mb-10 text-[clamp(38px,4.6vw,60px)]">QUESTIONS, ANSWERED</h2>
           <div className="grid gap-x-[clamp(24px,5vw,72px)] md:grid-cols-2">
@@ -317,9 +329,9 @@ export default function App() {
         <footer className="flex flex-wrap items-center gap-4 pt-8 pb-16 border-t border-white/10 text-[13px] text-muted">
           <div className="flex items-center gap-2.5 mr-auto">
             <img src={`${import.meta.env.BASE_URL}svg/capann-icon-light.svg`} alt="" className="w-[22px] h-[22px] opacity-70" />
-            <div>Capann is built by <a href="https://duowork.tech" className="text-draw hover:text-draw-hover">Duowork</a>, a software firm building for how people actually work.</div>
+            <div>Built by <a href="https://duowork.tech" className="text-draw hover:text-draw-hover">Duowork</a>. We build engines around how people and businesses work.</div>
           </div>
-          <div>One-time purchase. No subscription.</div>
+          <div>© {YEAR} Capann · One-time purchase. No subscription.</div>
         </footer>
       </main>
     </div>
