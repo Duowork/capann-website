@@ -146,7 +146,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-ink text-paper font-sans">
       <header className="fixed top-0 inset-x-0 z-50 px-[clamp(12px,3vw,32px)] pt-3">
-        <nav className={`max-w-[1280px] mx-auto flex items-center gap-7 px-5 md:px-7 py-3.5 rounded-[28px] border transition-all duration-morph ease-morph ${scrolled ? 'glass shadow-[0_18px_50px_rgba(0,0,0,0.45)]' : 'bg-transparent border-transparent'}`}>
+        <nav aria-label="Primary" className={`max-w-[1280px] mx-auto flex items-center gap-7 px-5 md:px-7 py-3.5 rounded-[28px] border transition-all duration-morph ease-morph ${scrolled ? 'glass shadow-[0_18px_50px_rgba(0,0,0,0.45)]' : 'bg-transparent border-transparent'}`}>
           <div className="flex items-center gap-3 mr-auto">
             <img src={`${import.meta.env.BASE_URL}svg/capann-icon-light.svg`} alt="Capann" className="w-[30px] h-[30px]" />
             <div className="font-display font-bold text-[29px] leading-none tracking-[0.03em]">
