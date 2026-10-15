@@ -1,0 +1,11 @@
+# Capann
+
+> Browser extension that lets you draw, point, screenshot and record on any page — so the people you're talking to actually see what you mean.
+
+- **Product:** Capann — screen annotation & recording (pencil, highlighter, arrows, shapes, text callouts, laser pointer, spotlight, eraser, PNG export, screen/camera recording)
+- **Pricing:** One-time purchase. No subscription. 30-day money-back guarantee.
+- **Browsers:** Chromium-based — Chrome, Edge, Brave. One license covers one device and browser.
+- **Privacy:** Recordings and screenshots download straight to your device. No account required, nothing uploaded.
+- **Maker:** [Duowork](https://duowork.tech) — "We build engines around how people and businesses work."
+- **Site:** [https://romeopeter.github.io/capann-website/](https://romeopeter.github.io/capann-website/)
+- **Shortcuts:** Alt+Shift+S toggle draw mode · Alt+Shift+T next tool · Alt+Shift+C clear · Esc exit draw mode
