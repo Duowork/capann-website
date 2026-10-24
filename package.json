@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "postbuild": "node scripts/copy-404.mjs",
     "lint": "oxlint",
     "preview": "vite preview",
     "predeploy": "npm run build",
@@ -16,6 +17,7 @@
     "@tailwindcss/vite": "^4.3.3",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "react-router": "^7.18.4",
     "tailwindcss": "^4.3.3"
   },
   "devDependencies": {
